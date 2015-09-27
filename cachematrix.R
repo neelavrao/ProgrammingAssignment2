@@ -20,7 +20,20 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 ## Write a short comment describing this function
-
+# The below function check if the inverse of a matrix exits in cache and returns if it exists in the cache
+#if not it will compute via solve() and set its value in 
+#the cache via setinverse
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
+		# This function assumes that the matrix is always invertible.
+    inv <- x$getinverse()
+    if(!is.null(inv)) {
+        message("success in getting cached data.")
+        return(inv)
+    }
+    data <- x$get()
+    inv <- solve(data)
+    x$setinverse(inv)
+    inv
 }
+
